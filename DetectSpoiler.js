@@ -1,5 +1,5 @@
 WORDS_LIST = [
-  '#got',
+  'got',
   'game of thrones',
   'kit harington',
   'arya stark',
@@ -34,7 +34,9 @@ WORDS_LIST = [
   'peter dinklage',
   'sophie turner',
   'night king',
-  'spoiler'
+  'spoiler',
+  'game-of-thrones',
+  'game_of_thrones'
 ];
 
 DEATH_NAMES = [
@@ -53,7 +55,7 @@ DEATH_NAMES = [
 //Changing the contains method to make it case insensitive
 
 let len=WORDS_LIST.length;
-let elements=document.querySelectorAll("h1,h2,h3,h4,h5,h6,li,ul,text,span,a");
+let elements=document.querySelectorAll("h1,h2,h3,h4,h5,h6,li,ul,text,span,img");
 let elemlen=elements.length;
 
 for(let i=0;i<elemlen;i++)
@@ -82,8 +84,9 @@ for(let i=0;i<elemlen;i++)
 }
 
 function hideImg(node){
-  node.style.webkitFilter = "blur(9px)";
-}
+  node.style.webkitFilter = "blur(8px)";
+  console.log('blurred')
+;}
 
 function hideText(node) {
 
@@ -91,23 +94,23 @@ function hideText(node) {
   {
     return;
   }
-  if(node.nodeName=='A' && node.childNodes.length!=0)
-  {
-    let l=node.childNodes.length;
-    for(let i=0;i<l;i++)
-    {
-      if(node.childNodes[i].nodeName=='IMG')
-        return;
-    }
-  }
-  //First handle nearby images, as probabily they also contain spoiler material.
+
   let ancestor=node.parentNode;
-  if(ancestor!=null && ancestor!='BODY' && ancestor.parentNode!='BODY') //do not want to completely remove the body !
+  if(ancestor!=null && ancestor.parentNode!==null)
+    ancestor=ancestor.parentNode;
+  if(ancestor!==null && ancestor!='BODY' && ancestor.parentNode!='BODY') //do not want to completely remove the body !
   {
+    if(ancestor===null)
+    {
+      ancestor=ancestor;
+    }
+    else{
       images = ancestor.getElementsByTagName('img');
       let l=images.length;
       for(let i = 0; i < l; i++)
-  			hideImg(images[i]);
+        hideImg(images[i]);
+    }
+
   }
 
 
@@ -117,10 +120,3 @@ function hideText(node) {
 	node.style.color = 'white';
   node.style.background='black';
 }
-
-/*
-var script = document.createElement('script');
-script.type = 'text/javascript';
-script.src = 'script.js';
-document.head.appendChild(script);
-*/
