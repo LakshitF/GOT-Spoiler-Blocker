@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["jquery-3.4.0.min.js", "Spoiler.js"],
+      "js": ["jquery-3.4.0.min.js", "DetectSpoiler.js"],
       "run_at": "document_end"
     }
   ]

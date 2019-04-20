@@ -29,7 +29,12 @@ WORDS_LIST = [
   'westeros',
   'white walker',
   'whitewalker',
-  'winterfell'
+  'winterfell',
+  'lena headey',
+  'peter dinklage',
+  'sophie turner',
+  'night king',
+  'spoiler'
 ];
 
 DEATH_NAMES = [
@@ -40,30 +45,33 @@ DEATH_NAMES = [
   'lost in trial by combat',
   'was incinerated by hot dragon breath',
   'was murdered by its very own uncle',
-  'was pounded by the Mountain'
+  'was pounded by the Mountain',
+  'could not wait 2 years',
+  'joined the night king\'s army'
 ];
 
 //Changing the contains method to make it case insensitive
 
 let len=WORDS_LIST.length;
-let elements=document.querySelectorAll("p,h1,h2,h3,h4,h5,h6,img,li");
+let elements=document.querySelectorAll("h1,h2,h3,h4,h5,h6,li,ul,text,span,a");
 let elemlen=elements.length;
 
 for(let i=0;i<elemlen;i++)
 {
   let flag=0;
+  if(elements[i].parentNode && elements[i].parentNode=='BODY')
+    continue;
   for(let j=0;j<len;j++)
   {
     let pattern=WORDS_LIST[j];
-    if(elements[i].textContent.toLowerCase().includes(pattern) || elements[i].innerHTML.toLowerCase().includes(pattern))
+    if(elements[i].innerHTML.toLowerCase().includes(pattern))
     {
-      flag=1;
-      if(elements[i].src!=undefined)
-      {
+      if(elements[i].nodeName=='IMG'){
         hideImg(elements[i]);
       }
       else
       {
+        flag=1;
         hideText(elements[i]);
       }
     }
@@ -78,17 +86,28 @@ function hideImg(node){
 }
 
 function hideText(node) {
+
+  if(node.nodeName=='IMG')
+  {
+    return;
+  }
+  if(node.nodeName=='A' && node.childNodes.length!=0)
+  {
+    let l=node.childNodes.length;
+    for(let i=0;i<l;i++)
+    {
+      if(node.childNodes[i].nodeName=='IMG')
+        return;
+    }
+  }
   //First handle nearby images, as probabily they also contain spoiler material.
   let ancestor=node.parentNode;
-  if(ancestor!=null && ancestor.parentNode!='BODY') //do not want to completely remove the body !
+  if(ancestor!=null && ancestor!='BODY' && ancestor.parentNode!='BODY') //do not want to completely remove the body !
   {
-    ancestor=ancestor.parentNode;
-    if(ancestor!=null && ancestor.parentNode!='BODY')
-    {
-        images = ancestor.getElementsByTagName('img');
-        for(let i = 0; i < images.length; i++)
-    			hideImg(images[i]);
-    }
+      images = ancestor.getElementsByTagName('img');
+      let l=images.length;
+      for(let i = 0; i < l; i++)
+  			hideImg(images[i]);
   }
 
 
