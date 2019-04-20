@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "GOT Spoiler Blocker",
+  "description": "It will block all spoilers of Game of Thrones, both images and text, and in a creative way",
+  "version": "1.2",
+  "author":"Lakshit",
+  "icons": {
+          "48": "icon.png" },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["jquery-3.4.0.min.js", "Spoiler.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
