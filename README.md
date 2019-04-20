@@ -4,8 +4,8 @@ This chrome extension will save you from getting any spoilers related to Game of
 This project is also beginner friendly and if you are looking for your very first PR's your are at the right place!
 And, no spoilers please ;)
 
-<img src="demo1.png" height="450" width="800"> <br>
-<img src="demo2.png" height="450" width="800">
+<img src="demo1.PNG" height="450" width="800"> <br>
+<img src="demo2.PNG" height="450" width="800">
 
 # Features
 - **Spoiler Blocking**: Searches entire web page and replaces Spoilers in a creative way.
