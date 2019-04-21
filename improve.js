@@ -1,3 +1,6 @@
+//Add a large set of words here and optimize the code.
+//This uses the contains method which is slowing down the JS because of DOM access time.
+//Then edit the manifest.json file to run this script.
 WORDS_LIST = [
   '#got',
   'game of thrones',
