@@ -49,7 +49,8 @@ DEATH_NAMES = [
   'was murdered by its very own uncle',
   'was pounded by the Mountain',
   'could not wait 2 years',
-  'joined the night king\'s army'
+  'joined the night king\'s army',
+  'burned to ashes','killed in the red wedding'
 ];
 
 //Changing the contains method to make it case insensitive
@@ -94,6 +95,10 @@ function hideText(node) {
   {
     return;
   }
+  // Do not edit nodes just with text field, but only divs and h1
+ if(node.nodeName=='text'){
+ 	return;
+ }
 
   let ancestor=node.parentNode;
   if(ancestor!=null && ancestor.parentNode!==null)
@@ -117,6 +122,6 @@ function hideText(node) {
   let random =Math.floor(Math.random() * (+DEATH_NAMES.length - +0)) + +0;  //gets random quote from GOT
   let death=DEATH_NAMES[random];
 	node.innerHTML = 'A spoiler here '+death;
-	node.style.color = 'white';
-  node.style.background='black';
+	node.style.color = 'black';
+  node.style.background='white';
 }
